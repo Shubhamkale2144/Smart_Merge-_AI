@@ -1,7 +1,9 @@
 import React from 'react';
-import "../assets/LandingPage.css";
+import "../Css/LandingPage.css";
 import heroImage from "../assets/image.png"; 
 import { useNavigate } from "react-router-dom";
+import { Link } from 'react-router-dom';
+
 
 const LandingPage = () => {
     const navigate = useNavigate();
@@ -33,16 +35,15 @@ const LandingPage = () => {
       <nav className="nav">
         <h1 className="logo">smart<span>merge</span></h1>
         <div className="nav-links">
-          <a href="#home" className="nav-link">HOME</a>
-          <a href="#about" className="nav-link">ABOUT</a>
-          <a href="#guidelines" className="nav-link">GUIDELINES</a>
+          <Link to="/about" className="nav-link">ABOUT</Link>
+          <Link to="/guidelines" className="nav-link">GUIDELINES</Link>
         </div>
       </nav>
 
 
       <section className="hero-section">
         <div className="hero-content">
-          <h1 className="title">SMARTMERGE</h1>
+          <h1 className="title">SMARTMERGEAI</h1>
           <p className="subtitle">
             The ultimate solution to effortlessly merge GitHub repositories
             while preserving commits, branches, and history

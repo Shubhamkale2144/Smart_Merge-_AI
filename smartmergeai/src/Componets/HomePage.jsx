@@ -12,7 +12,9 @@ import {
   FiChevronDown,
   FiUser
 } from 'react-icons/fi';
-import '../assets/HomePage.css';
+import '../Css/HomePage.css';
+import PRResultPage from './PRResultDemo';
+import PRResultDemo from './PRResultDemo'; // Import the interactive demo
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -22,6 +24,8 @@ const HomePage = () => {
   const [isRepoDropdownOpen, setIsRepoDropdownOpen] = useState(false);
   const [isPrDropdownOpen, setIsPrDropdownOpen] = useState(false);
   const [userEmail, setUserEmail] = useState('');
+  const [showResults, setShowResults] = useState(false);
+  const [useInteractiveDemo, setUseInteractiveDemo] = useState(true); // Toggle for demo version
   
   // Sample data
   const repos = Array.from({length: 10}, (_, i) => `Repo ${i+1}`);
@@ -65,6 +69,18 @@ const HomePage = () => {
     navigate('/login');
   };
 
+  const handleEvaluate = () => {
+    if (selectedPR) {
+      setShowResults(true);
+    } else {
+      alert("Please select a PR to evaluate");
+    }
+  };
+
+  const handleBackToSelection = () => {
+    setShowResults(false);
+  };
+
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (!e.target.closest('.input-container')) {
@@ -76,6 +92,11 @@ const HomePage = () => {
     window.addEventListener('click', handleClickOutside);
     return () => window.removeEventListener('click', handleClickOutside);
   }, []);
+
+  // Toggle between interactive demo and simple version
+  const toggleDemoMode = () => {
+    setUseInteractiveDemo(!useInteractiveDemo);
+  };
 
   return (
     <div className="home-page">
@@ -124,120 +145,148 @@ const HomePage = () => {
 
         <div className="divider horizontal"></div>
 
-        {/* Repo Information with Dropdown */}
-        <div className="repo-table compact">
-          <div className="repo-info-header">
-            <h3>REPO INFORMATION</h3>
-          </div>
-          
-          <div className="repo-form">
-            <div className="form-group">
-              <label>Repo Owner Name</label>
-              <div className="input-container">
+        {showResults ? (
+          <>
+            {useInteractiveDemo ? (
+              <PRResultDemo 
+                selectedPR={selectedPR}
+                onBack={handleBackToSelection}
+              />
+            ) : (
+              <PRResultPage 
+                selectedPR={selectedPR}
+                onBack={handleBackToSelection}
+              />
+            )}
+            <div className="demo-toggle">
+              <label>
                 <input 
-                  type="text" 
-                  value={repoOwner}
-                  onChange={(e) => setRepoOwner(e.target.value)}
-                  className="small-input"
+                  type="checkbox" 
+                  checked={useInteractiveDemo} 
+                  onChange={toggleDemoMode}
                 />
-                <FiGithub className="github-icon" size={16} />
-              </div>
+                Use interactive version
+              </label>
             </div>
-            
-            <div className="form-group">
-              <label>Select Repo Name</label>
-              <div className="input-container">
-                <input
-                  type="text"
-                  value={repoName}
-                  readOnly
-                  onClick={() => setIsRepoDropdownOpen(!isRepoDropdownOpen)}
-                  className="small-input"
-                />
-                <FiChevronDown 
-                  className="dropdown-icon" 
-                  size={16}
-                  onClick={() => setIsRepoDropdownOpen(!isRepoDropdownOpen)}
-                />
-                
-                {isRepoDropdownOpen && (
-                  <div className="dropdown-list">
-                    {repos.map((repo, index) => (
-                      <div
-                        key={index}
-                        className="dropdown-item"
-                        onClick={() => {
-                          setRepoName(repo);
-                          setIsRepoDropdownOpen(false);
-                        }}
-                      >
-                        {repo}
-                      </div>
-                    ))}
-                  </div>
-                )}
+          </>
+        ) : (
+          <>
+            {/* Repo Information with Dropdown */}
+            <div className="repo-table compact">
+              <div className="repo-info-header">
+                <h3>REPO INFORMATION</h3>
               </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Stats Cards */}
-        <div className="stats-container">
-          <div className="stat-card">
-            <h4>PR COUNT</h4>
-            <div className="stat-value">31</div>
-            <button className="view-button">View</button>
-          </div>
-          <div className="stat-card">
-            <h4>PR OPEN</h4>
-            <div className="stat-value">81</div>
-            <button className="view-button">View</button>
-          </div>
-          <div className="stat-card">
-            <h4>PR CLOSED</h4>
-            <div className="stat-value">56</div>
-            <button className="view-button">View</button>
-          </div>
-        </div>
-
-        {/* Evaluation Section */}
-        <div className="evaluation-section">
-          <div className="form-group">
-            <label>Select PR to evaluate</label>
-            <div className="input-container">
-              <input
-                type="text"
-                value={selectedPR}
-                readOnly
-                onClick={() => setIsPrDropdownOpen(!isPrDropdownOpen)}
-                className="pr-input small-input"
-              />
-              <FiChevronDown 
-                className="dropdown-icon" 
-                size={16}
-                onClick={() => setIsPrDropdownOpen(!isPrDropdownOpen)}
-              />
               
-              {isPrDropdownOpen && (
-                <div className="dropdown-list">
-                  {prs.map((pr, index) => (
-                    <div
-                      key={index}
-                      className="dropdown-item"
-                      onClick={() => {
-                        setSelectedPR(pr);
-                        setIsPrDropdownOpen(false);
-                      }}
-                    >
-                      {pr}
-                    </div>
-                  ))}
+              <div className="repo-form">
+                <div className="form-group">
+                  <label>Repo Owner Name</label>
+                  <div className="input-container">
+                    <input 
+                      type="text" 
+                      value={repoOwner}
+                      onChange={(e) => setRepoOwner(e.target.value)}
+                      className="small-input"
+                    />
+                    <FiGithub className="github-icon" size={16} />
+                  </div>
                 </div>
-              )}
+                
+                <div className="form-group">
+                  <label>Select Repo Name</label>
+                  <div className="input-container">
+                    <input
+                      type="text"
+                      value={repoName}
+                      readOnly
+                      onClick={() => setIsRepoDropdownOpen(!isRepoDropdownOpen)}
+                      className="small-input"
+                    />
+                    <FiChevronDown 
+                      className="dropdown-icon" 
+                      size={16}
+                      onClick={() => setIsRepoDropdownOpen(!isRepoDropdownOpen)}
+                    />
+                    
+                    {isRepoDropdownOpen && (
+                      <div className="dropdown-list">
+                        {repos.map((repo, index) => (
+                          <div
+                            key={index}
+                            className="dropdown-item"
+                            onClick={() => {
+                              setRepoName(repo);
+                              setIsRepoDropdownOpen(false);
+                            }}
+                          >
+                            {repo}
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-          <button className="evaluate-button">Evaluate</button>
-        </div>
+
+            {/* Stats Cards */}
+            <div className="stats-container">
+              <div className="stat-card">
+                <h4>PR COUNT</h4>
+                <div className="stat-value">31</div>
+                <button className="view-button">View</button>
+              </div>
+              <div className="stat-card">
+                <h4>PR OPEN</h4>
+                <div className="stat-value">81</div>
+                <button className="view-button">View</button>
+              </div>
+              <div className="stat-card">
+                <h4>PR CLOSED</h4>
+                <div className="stat-value">56</div>
+                <button className="view-button">View</button>
+              </div>
+            </div>
+
+            {/* Evaluation Section */}
+            <div className="evaluation-section">
+              <div className="form-group">
+                <label>Select PR to evaluate</label>
+                <div className="input-container">
+                  <input
+                    type="text"
+                    value={selectedPR}
+                    readOnly
+                    onClick={() => setIsPrDropdownOpen(!isPrDropdownOpen)}
+                    className="pr-input small-input"
+                  />
+                  <FiChevronDown 
+                    className="dropdown-icon" 
+                    size={16}
+                    onClick={() => setIsPrDropdownOpen(!isPrDropdownOpen)}
+                  />
+                  
+                  {isPrDropdownOpen && (
+                    <div className="dropdown-list">
+                      {prs.map((pr, index) => (
+                        <div
+                          key={index}
+                          className="dropdown-item"
+                          onClick={() => {
+                            setSelectedPR(pr);
+                            setIsPrDropdownOpen(false);
+                          }}
+                        >
+                          {pr}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+              <button className="evaluate-button" onClick={handleEvaluate}>Evaluate</button>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

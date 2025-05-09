@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import "../assets/SignIn.css";
+import "../Css/SignIn.css";
 
 const API_BASE_URL = 'http://localhost:5000';
 

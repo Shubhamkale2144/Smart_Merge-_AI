@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import styles from "../assets/Signup.module.css";
+import styles from "../Css/Signup.module.css";
+
 
 const API_BASE_URL = 'http://localhost:5000';
 
@@ -242,10 +243,9 @@ const Signup = () => {
             </p>
             <div className={styles.homeLink}>
               <Link to="/">Home</Link>
-            </div>  
-            <p className={styles.legalText}>
-              Privacy Policy | Terms of Service
-            </p>
+            </div>             
+            <Link to="/PrivacyPolicy" className={styles.legalText}>Privacy Policy</Link> | 
+            <Link to="/TermsOfService" className={styles.legalText}>Terms of Service</Link>
           </div>
         </div>
       </div>

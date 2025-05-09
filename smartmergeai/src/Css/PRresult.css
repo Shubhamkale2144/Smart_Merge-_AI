@@ -1,0 +1,235 @@
+.pr-result-demo {
+    width: 100%;
+    min-height: 100%;
+    padding: 20px;
+    background: #FFFFFF;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .result-header {
+    margin-bottom: 30px;
+  }
+  
+  .navigation-path {
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    line-height: 24px;
+    margin-bottom: 15px;
+  }
+  
+  .path-item {
+    cursor: pointer;
+  }
+  
+  .path-item.inactive {
+    color: rgba(29, 36, 46, 0.5);
+    font-weight: 400;
+  }
+  
+  .path-item.active {
+    color: #1D242E;
+    font-weight: 700;
+  }
+  
+  .path-separator {
+    margin: 0 15px;
+    color: #1D242E;
+  }
+  
+  .result-subtitle {
+    font-size: 14px;
+    line-height: 21px;
+    color: #1D242E;
+    font-weight: 400;
+  }
+  
+  .tab-container {
+    display: flex;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #E0E0E0;
+  }
+  
+  .tab-button {
+    padding: 10px 20px;
+    font-size: 14px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    margin-right: 10px;
+    color: #666;
+  }
+  
+  .tab-button.active {
+    border-bottom: 2px solid #3B82F6;
+    color: #1D242E;
+    font-weight: 500;
+  }
+  
+  .result-container {
+    width: 100%;
+    margin: 0 auto;
+  }
+  
+  .result-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid rgba(29, 36, 46, 0.3);
+    border-radius: 4px;
+    background: #FFFFFF;
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+  
+  .result-table th, 
+  .result-table td {
+    padding: 15px 20px;
+    text-align: left;
+    border-bottom: 1px solid rgba(29, 36, 46, 0.3);
+  }
+  
+  .result-table th {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 22px;
+    color: #1D242E;
+  }
+  
+  .result-table td {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 22px;
+    color: #1D242E;
+  }
+  
+  .result-table tr:last-child td {
+    border-bottom: none;
+  }
+  
+  .details-button {
+    background-color: #3B82F6;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+  }
+  
+  .details-panel {
+    background-color: #F9FAFB;
+    border: 1px solid #E5E7EB;
+    border-radius: 4px;
+    padding: 20px;
+    margin-top: 15px;
+  }
+  
+  .details-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  
+  .details-header h3 {
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0;
+  }
+  
+  .close-button {
+    background: transparent;
+    border: none;
+    color: #6B7280;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .details-text {
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+    color: #4B5563;
+  }
+  
+  .metrics-panel {
+    background-color: white;
+    border: 1px solid #E5E7EB;
+    border-radius: 4px;
+    padding: 15px;
+  }
+  
+  .metrics-panel h4 {
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0 0 15px 0;
+    color: #1D242E;
+  }
+  
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  
+  .metric-item {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .metric-label {
+    font-size: 12px;
+    color: #6B7280;
+    margin: 0 0 5px 0;
+  }
+  
+  .metric-value {
+    font-size: 14px;
+    font-weight: 500;
+    color: #1D242E;
+    margin: 0;
+  }
+  
+  .action-buttons {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+  }
+  
+  .back-button {
+    background-color: #F3F4F6;
+    color: #1D242E;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 14px;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+  
+  .approve-button {
+    background-color: #3B82F6;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  
+  .demo-toggle {
+    margin-top: 15px;
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .demo-toggle label {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #666;
+  }
+  
+  .demo-toggle input {
+    margin-right: 8px;
+  }
